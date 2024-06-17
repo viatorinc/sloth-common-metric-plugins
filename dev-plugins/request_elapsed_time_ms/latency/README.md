@@ -57,9 +57,7 @@ Even combining unrelated calls can lead to dilution of the results.
 
 ## Metric requirements
 
-- `request:ELAPSED_TIME_MS_count`: From experience-common.
-
-https://gitlab.dev.tripadvisor.com/viator/engineering/experiences-common/-/blob/develop/experiences-common-shared/src/main/java/com/tripadvisor/experiences/common/shared/integration/monitoring/MonitoringData.java#L103-107
+- `request:ELAPSED_TIME_MS_count`: From experience-common, not exposed
 
 ## Usage examples
 

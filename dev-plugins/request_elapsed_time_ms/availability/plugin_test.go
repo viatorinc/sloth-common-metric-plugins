@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mebenhoehta/temp-sloth-plugin/dev-plugins/request_elapsed_time_ms/availability"
+	"github.com/viatorinc/sloth-common-metric-plugins/dev-plugins/request_elapsed_time_ms/availability"
 	"github.com/stretchr/testify/assert"
 )
 

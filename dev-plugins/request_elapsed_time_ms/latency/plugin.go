@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/mebenhoehta/temp-sloth-plugin/dev-plugins/request_elapsed_time_ms/filters"
+	"github.com/viatorinc/sloth-common-metric-plugins/dev-plugins/request_elapsed_time_ms/filters"
 )
 
 // see notes in project readme how and why the below marker is used
@@ -44,8 +44,8 @@ var queryForRatiosTpl = template.Must(template.New("").Parse(`
 ) OR on() vector(1))
 `))
 
-// as defined here:
-// https: //gitlab.dev.tripadvisor.com/viator/engineering/experiences-common/-/blob/develop/experiences-common-shared/src/main/java/com/tripadvisor/experiences/common/shared/performance/ResponseTimeBucket.java
+// as defined here (internal):
+// experiences-common/-/blob/develop/experiences-common-shared/src/main/java/com/tripadvisor/experiences/common/shared/performance/ResponseTimeBucket.java
 var buckets = []int{5, 10, 25, 50, 75, 100, 250, 500, 1000, 2000, 3000, 5000, 10000, 20000, 60000, 120000, 500000}
 var LowestBucket = buckets[0]
 var TopBucket = buckets[len(buckets)-1]
