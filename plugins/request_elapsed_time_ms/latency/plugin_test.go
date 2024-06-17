@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mebenhoehta/temp-sloth-plugin/dev-plugins/request_elapsed_time_ms/latency"
+	"github.com/mebenhoehta/temp-sloth-plugin/plugins/request_elapsed_time_ms/latency"
 	"github.com/stretchr/testify/assert"
 )
 
