@@ -54,7 +54,6 @@ import (
 )
 ```
 
-
 # workflow 
 
 Until more time is spent on this, the work and "release" process consists of these awkward steps:
@@ -77,12 +76,4 @@ Until more time is spent on this, the work and "release" process consists of the
     1. github will run `check`, `unit-test`  as well as `integration-test`
 1. Create an MR to `main`
 1. Once merged, tag the release and use the new tag as the current release for sloth , after testing in ninjas change sloth to use the new version
-
-
-
-
-
-
-
-
 
