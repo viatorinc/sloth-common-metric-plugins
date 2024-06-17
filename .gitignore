@@ -17,9 +17,11 @@
 
 # Vendor directory
 vendor/
+.tmp/
 
 # Test coverage.
 .test_coverage.txt
 
 # Binaries
 bin/
+
