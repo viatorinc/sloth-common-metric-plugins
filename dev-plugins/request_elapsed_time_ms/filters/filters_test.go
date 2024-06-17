@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mebenhoehta/temp-sloth-plugin/dev-plugins/request_elapsed_time_ms/filters"
 	"github.com/stretchr/testify/assert"
+	"github.com/viatorinc/sloth-common-metric-plugins/dev-plugins/request_elapsed_time_ms/filters"
 )
 
 func TestGetServiceName(t *testing.T) {

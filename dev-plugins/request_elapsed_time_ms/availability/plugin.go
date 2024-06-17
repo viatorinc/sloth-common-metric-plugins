@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"text/template"
 
-	"github.com/mebenhoehta/temp-sloth-plugin/dev-plugins/request_elapsed_time_ms/filters"
+	"github.com/viatorinc/sloth-common-metric-plugins/dev-plugins/request_elapsed_time_ms/filters"
 )
 
 // see notes in project readme how and why the below marker is used
