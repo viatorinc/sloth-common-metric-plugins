@@ -45,7 +45,7 @@ var queryForRatiosTpl = template.Must(template.New("").Parse(`
 `))
 
 // as defined here (internal):
-// experiences-common/-/blob/develop/experiences-common-shared/src/main/java/com/tripadvisor/experiences/common/shared/performance/ResponseTimeBucket.java
+// experiences-common/-/blob/develop/experiences-common-shared/src/main/java/com/tripadvisor/experiences/common/shared/performance/ResponseTimeBucket.java.
 var buckets = []int{5, 10, 25, 50, 75, 100, 250, 500, 1000, 2000, 3000, 5000, 10000, 20000, 60000, 120000, 500000}
 var LowestBucket = buckets[0]
 var TopBucket = buckets[len(buckets)-1]
