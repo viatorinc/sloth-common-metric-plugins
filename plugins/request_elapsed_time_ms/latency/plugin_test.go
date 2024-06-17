@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mebenhoehta/temp-sloth-plugin/plugins/request_elapsed_time_ms/latency"
 	"github.com/stretchr/testify/assert"
+	"github.com/viatorinc/sloth-common-metric-plugins/plugins/request_elapsed_time_ms/latency"
 )
 
 func TestGetBucketValues(t *testing.T) {
