@@ -1,21 +1,13 @@
-package filters
+package availability
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"regexp"
 	"strings"
 	"text/template"
 )
-
-// sloth SLI plugins have to be in a single file and can only use go standard modules
-// https://sloth.dev/usage/plugins/#common-plugins
-// Even though this should be a package alternatively we combine files as part of a pipeline.
-// but use it as package for local development and testing
-
-// see notes in project readme how and why the below marker is used
-// no code must be above this marker
-// FILTER-TEMPLATE-LOCATION
 
 var generalFilterTpl = template.Must(template.New("").Option("missingkey=error").Parse(
 	`job="{{.servicename}}-metrics"
@@ -133,4 +125,53 @@ func PrepareFilter(filter string) string {
 		filter = regxEquals.ReplaceAllString(filter, "=")
 	}
 	return filter
+}
+
+const (
+	// SLIPluginVersion is the version of the plugin spec.
+	SLIPluginVersion = "prometheus/v1"
+	// SLIPluginID is the registering ID of the plugin.
+	SLIPluginID = "viator-sloth-plugins/request_elapsed_time_ms/availability"
+)
+
+var queryTpl = template.Must(template.New("").Parse(`
+1 - ((
+	sum(rate(request:ELAPSED_TIME_MS_count{ {{- .general_exp_common_filter -}} {{- .success_exp_common_filter -}}  }[{{"{{.window}}"}}]))
+	/
+	(sum(rate(request:ELAPSED_TIME_MS_count{ {{- .general_exp_common_filter -}} }[{{"{{.window}}"}}])) > 0)
+) OR on() vector(1))
+`))
+
+// SLIPlugin will return a query that will return the availability error based on ELAPSED_TIME_MS_count service metrics.
+func SLIPlugin(_ context.Context, _, _, options map[string]string) (string, error) {
+
+	err := ValidateGeneralExpCommonFilterOptions(options)
+	if err != nil {
+		return "", err
+	}
+
+	serviceName, _ := GetServiceName(options)
+
+	generalFilter, err := GetGeneralExpCommonFilter(options)
+	if err != nil {
+		return "", fmt.Errorf("could not generate general filter for '%s': %w", serviceName, err)
+	}
+
+	generalSuccessFilter, err := GetSuccessFilter(options, true)
+	if err != nil {
+		return "", fmt.Errorf("could not generate general success filter for '%s': %w", serviceName, err)
+	}
+
+	// Create query.
+	var b bytes.Buffer
+	data := map[string]string{
+		"general_exp_common_filter": generalFilter,
+		"success_exp_common_filter": generalSuccessFilter,
+	}
+	err = queryTpl.Execute(&b, data)
+	if err != nil {
+		return "", fmt.Errorf("could not render query template for '%s': %w", serviceName, err)
+	}
+
+	return b.String(), nil
 }

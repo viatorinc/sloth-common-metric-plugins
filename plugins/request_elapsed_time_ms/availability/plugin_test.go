@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/viatorinc/sloth-common-metric-plugins/dev-plugins/request_elapsed_time_ms/availability"
+	"github.com/viatorinc/sloth-common-metric-plugins/plugins/request_elapsed_time_ms/availability"
 )
 
 func TestSLIPlugin(t *testing.T) {
